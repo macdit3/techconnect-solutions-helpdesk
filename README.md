@@ -1,107 +1,135 @@
-# Name of the project or a logo
+# TechConnect Solutions for Helpdesk
 
-![Your logo](https://itmo.ru/file/pages/213/logo_na_plashke_russkiy_belyy.png)
+![Your logo](tcs.png)
 
-[![Azure](https://dev.azure.com/scikit-learn/scikit-learn/_apis/build/status/scikit-learn.scikit-learn?branchName=main)](https://dev.azure.com/scikit-learn/scikit-learn/_build/latest?definitionId=1&branchName=main)
-[![CirrusCI](https://img.shields.io/cirrus/github/scikit-learn/scikit-learn/main?label=Cirrus%20CI)](https://circleci.com/gh/scikit-learn/scikit-learn)
-[![Codecov](https://codecov.io/gh/scikit-learn/scikit-learn/branch/main/graph/badge.svg?token=Pk8G9gg3y9)](https://codecov.io/gh/scikit-learn/scikit-learn)
-[![Nightly wheels](https://github.com/scikit-learn/scikit-learn/workflows/Wheel%20builder/badge.svg?event=schedule)](https://github.com/scikit-learn/scikit-learn/actions?query=workflow%3A%22Wheel+builder%22+event%3Aschedule)
-[![PythonVersion](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)](https://pypi.org/project/scikit-learn/)
-[![PyPi](https://img.shields.io/pypi/v/scikit-learn)](https://pypi.org/project/scikit-learn)
-[![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![DOI](https://zenodo.org/badge/21369/scikit-learn/scikit-learn.svg)](https://zenodo.org/badge/latestdoi/21369/scikit-learn/scikit-learn)
 
-## The purpose of the project
+## Description
+TechConnect Solutions functions as a centralized help desk system designed for the comprehensive tracking of customer incidents. It facilitates multi-channel ticket submission, encompassing web-based interfaces, electronic mail, and an artificial intelligence chatbot. In addition to standard support functionalities, the system prioritizes expedited response times for VIP clientele. This platform represents a customized implementation of the Zammad ticketing system, augmented with professional branding enhancements. User access control is provisioned to align with the authorized capabilities and rights of each user, including administrators, agents, and customers.
 
-Here you can write about what your application can do and what's its goal.
-For that purpose you can use bullet or numbered lists, GIFs and links.
-
-1. Goal 1
-2. Goal 2
 
 ## Table of Contents
 
-- [Core features](#core-features)
-- [Installation](#installation)
-- [Examples](#examples)
-- [Project Structure](#project-structure)
-- [Documentation](#documentation)
-- [Getting started](#getting-started)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
-- [Contacts](#contacts)
-- [Citation](#citation)
-- [Examples of good README's](#examples-of-good-readmes)
+- [TechConnect Solutions for Helpdesk](#techconnect-solutions-for-helpdesk)
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Core features](#core-features)
+  - [Installation](#installation)
+  - [Documentation of the project implementation](#documentation-of-the-project-implementation)
+  - [Acknowledgments](#acknowledgments)
 
 ## Core features
 
-- Feature 1
-- Feature 2
-- etc.
+1. Multi-channel communication support (email, phone, web, & SMS)
+2. Ticket Management
+3. Knowledge base capability
+4. Full-text search 
+5. Allow automation and customization 
+
 
 ## Installation
 
-How users can install your project.
+1. Download and install Docker Desktop
+   https://docs.docker.com/desktop/setup/install/windows-install/
 
-*Name of your project* can be installed with `pip`:
-
+2. Install and update Windows Subsystem for Linux (WSL2) - Ubuntu distribution
+* Run PowerShell in adminstrator mode:
 ```markdown
-pip install name
+  wsl --install
+```
+* Update wsl2 
+```markdown
+wsl --update 
+```
+* Install required packages - use sudo/root account to install
+  
+```markdown
+  sudo apt install git wget curl -y
 ```
 
-## Examples
+## Documentation of the project implementation
+* Clone the rquired Zammand-docker-compose images
+  1. Create a new project directory 
+```markdown
+  $ mkdir projects
 
-Describe examples how it should work and should be used.
-Images, GIFs and code cells are welcome.
+  $ cd projects
+```
+   
+  2. Clone the Zammand-docker-compose for the github.com
+```markdown
+  $ git clone git@github.com:zammad/zammad-docker-compose.git
+```
+  3. Change directory to the installed zammand-docker-compose folder
+```markdown
+  $ cd zammad-docker-compose
+```
+  4. Create a backup copy of the .env.dist file and edit
+```markdown
+  $ ls -al  # list all files and folders within the current directory
 
-## Project Structure
+  $ cp .env.dist .env   # Create a copy of the environment file
+```
+![alt text](image.png)
 
-Stable version is located ...
+5. Modify the zammand credentials (username & password) to strong ones
+ ![alt text](image-1.png)
 
-Repo includes:
+6. Change the Time Zone filed inside the docker-compose.yml file to match your time zone
+  ![alt text](image-2.png)
 
-- package 1 - explanation
-- package 2 - explanation
-- etc.
+7. Pull the related docker images to Zammand applicaiton
+    ```markdown
+      $ docker compose Pull
+    ```
 
-## Documentation
+    ![alt text](image-3.png)
+    
+8. Run Zammand application in background or in deamon mode
+    ```markdown
+      $ docker compose up -d
+    ```
+9. Wait for few minutes for your Zammand application provision and visit http://localhost:8080
+   
 
-Link to the documentation
 
-## Getting started
+10. Start setting up your new system by following the wizard prompts or migrate from another helpdesk support system.
+![alt text](image-4.png)
 
-Tutorials if any
+11. Setup administrator account by filling the following fields
+![alt text](image-5.png)
 
-## License
 
-Link to the license
+12. Fill in required fields, organization name, upload your company log, URL, and click next.
+    ![alt text](image-6.png)
+  
+13. Communication channels (web, email & chat ) configuration 
+    
+  a. Web configuration
+
+  b. Email configuration
+
+  c. Chat configuration
+
+
+
+14. Branding Configuration: adding custom company name and upload log
+    
+![alt text](image-7.png)
+  
+
+15. User Management: add 2 administrators, 3 agents, and 5 customers.
+![alt text](image-8.png)
+
+16.  Service Level Agreements (SLAs): configure standard users to 24-hours and VIP customers to 12-hours response time.
+17.  
+![alt text](image-9.png)
+
+
 
 ## Acknowledgments
 
-Acknowledgments
+* Author: Macuei Mathiang 
+* This project was a part of the MA workforce IT Development training Projects.
+* Date 02/20/2025
 
-## Contacts
 
-Your contacts. For example:
-
-- [Telegram channel](https://t.me/) answering questions about your project
-- [VK group](<https://vk.com/>) your VK group
-- etc.
-
-## Citation
-
-@article{"name",
-  title = {},
-  author = {},
-  journal = {},
-  year = {},
-  issn = {},
-  doi = {}}
-
-bibtex-ссылку удобно брать с google scholar
-
-# Examples of good README's
-
-- <https://github.com/pytorch/pytorch>
-- <https://github.com/scikit-learn/scikit-learn>
-- <https://github.com/aimclub/FEDOT>
